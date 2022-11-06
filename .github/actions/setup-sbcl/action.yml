@@ -21,8 +21,7 @@ runs:
       shell: bash
       run: |
         echo "::group::Install Windows software"
-        Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-        irm get.scoop.sh | iex
+        iwr -useb get.scoop.sh | iex
         scoop install roswell
         ros install sbcl
         ros run
