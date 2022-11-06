@@ -16,11 +16,14 @@ runs:
         sudo apt-get install -y sbcl
         echo "::endgroup::"
 
-    - name: Mark unsupported OS
-      if: runner.os != 'Linux'
+    - name: Install Windows software
+      if: runner.os == 'Windows'
       shell: bash
       run: |
-        echo "::group::Install Unsupported"
-        echo "Installation unsupported on this OS for now"
-        exit 1
+        echo "::group::Install Windows software"
+        Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+        irm get.scoop.sh | iex
+        scoop install roswell
+        ros install sbcl
+        ros run
         echo "::endgroup::"
