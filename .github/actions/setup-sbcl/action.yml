@@ -21,7 +21,7 @@ runs:
       shell: pwsh
       run: |
         echo "::group::Install Windows software"
-        Invoke-WebRequest -UseBasicParsing get.scoop.sh | Invoke-Expression
+        iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
         scoop install roswell
         ros install sbcl
         ros run
