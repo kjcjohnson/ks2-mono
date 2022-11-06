@@ -25,16 +25,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      - name: Check filesystem
-        run: |
-          pwd
-          ls -la
-          ls -la .github
-          ls -la .github/actions
-          ls -la .github/actions/install-sbcl
-
       - name: Install dependencies
-        uses: ./.github/actions/install-sbcl
+        uses: ./.github/actions/setup-sbcl
 
       # Runs a single command using the runners shell
       - name: Attempt Bootstrap
