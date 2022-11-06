@@ -22,6 +22,7 @@ runs:
       run: |
         echo "::group::Install Windows software"
         iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
+        scoop install msys2
         scoop install roswell
         ros install sbcl
         ros run
