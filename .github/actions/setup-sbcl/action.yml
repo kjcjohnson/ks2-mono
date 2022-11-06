@@ -22,8 +22,7 @@ runs:
       run: |
         echo "::group::Install Windows software"
         iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
+        Add-Content $env:GITHUB_PATH "$HOME\scoop\shims"
         scoop install sbcl
-        echo $env:PATH
-        ls ~/scoop/
         sbcl --help
         echo "::endgroup::"
