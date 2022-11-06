@@ -18,10 +18,10 @@ runs:
 
     - name: Install Windows software
       if: runner.os == 'Windows'
-      shell: bash
+      shell: pwsh
       run: |
         echo "::group::Install Windows software"
-        iwr -useb get.scoop.sh | iex
+        Invoke-WebRequest -UseBasicParsing get.scoop.sh | Invoke-Expression
         scoop install roswell
         ros install sbcl
         ros run
