@@ -23,4 +23,7 @@ runs:
         echo "::group::Install Windows software"
         iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
         scoop install sbcl
+        echo $env:PATH
+        ls ~/scoop/
+        sbcl --help
         echo "::endgroup::"
