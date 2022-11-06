@@ -33,5 +33,5 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Attempt Bootstrap
-        run: sbcl --load "bootstrap.lisp"
+        run: sbcl --load "bootstrap.lisp" --eval '(ql:quickload "com.kjcjohnson.ks2.runner")'
 
