@@ -1,0 +1,6 @@
+# The usual suspects
+*~
+\#*#
+
+# Ignore the quicklisp data directory
+quicklisp/
