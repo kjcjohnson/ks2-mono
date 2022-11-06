@@ -1,0 +1,26 @@
+name: Install SBCL
+description: Install SBCL on the target system
+inputs:
+  version:
+    default: false
+
+runs:
+  using: composite
+  steps:
+    - name: Install Linux software
+      if: runner.os == 'Linux'
+      shell: bash
+      run: |
+        echo "::group::Install Linux software"
+        sudo apt-get update
+        sudo apt-get install -y sbcl
+        echo "::endgroup::"
+
+    - name: Mark unsupported OS
+      if: runner.os != 'Linux'
+      shell: bash
+      run: |
+        echo "::group::Install Unsupported"
+        echo "Installation unsupported on this OS for now"
+        exit 1
+        echo "::endgroup::"
