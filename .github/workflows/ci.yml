@@ -39,6 +39,12 @@ jobs:
         uses: ./.github/actions/setup-sbcl
 
       # Runs a single command using the runners shell
-      - name: Attempt Bootstrap
+      - name: Bootstrap and build
         run: sbcl --load "bootstrap.lisp" --load "build.lisp"
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ks2-bin
+          path: bin/
 
