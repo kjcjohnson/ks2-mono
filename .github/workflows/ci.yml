@@ -56,6 +56,7 @@ jobs:
 
   benchmarks:
     strategy:
+      fail-fast: false
       matrix:
         benchmark:
           - datatypes
