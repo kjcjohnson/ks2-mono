@@ -51,6 +51,40 @@ jobs:
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: ks2-bin-${{ matrix.suffix }} 
+          name: ks2-bin-${{ matrix.suffix }}
           path: ks2/bin/
+
+  benchmarks:
+    strategy:
+      matrix:
+        benchmark:
+          - datatypes
+          - imperative
+          - integer-arithmetic
+          - non-deterministic
+          - regular-expressions/alpharegex
+          - regular-expressions/manually-constructed
+
+    name: Benchmark Suite ${{ matrix.benchmark }}
+    runs-on: ubuntu-latest
+    needs: [build]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Grab Binary
+        uses: actions/download-artifact@v3
+        with:
+          name: ks2-bin-linux-x64
+          path: bin
+
+      - name: Run Suite
+        run: |
+          bin/ks2 --suite ${{ matrix.benchmark }}
+
+      - name: Upload results
+        uses: actions/upload-artifact@v3
+        with:
+          name: results
+          path: data/
 
