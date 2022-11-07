@@ -80,6 +80,7 @@ jobs:
 
       - name: Run Suite
         run: |
+          chmod a+x bin/*
           bin/ks2 --suite ${{ matrix.benchmark }}
 
       - name: Upload results
