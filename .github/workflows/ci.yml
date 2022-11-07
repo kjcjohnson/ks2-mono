@@ -22,9 +22,11 @@ jobs:
         include:
           - name: Ubuntu Build
             os: ubuntu-latest
+            suffix: linux-x64
 
           - name: Windows Build
             os: windows-latest
+            suffix: win-x64
 
     name: ${{ matrix.name }}
     runs-on: ${{ matrix.os }}
@@ -38,13 +40,15 @@ jobs:
       - name: Install dependencies
         uses: ./.github/actions/setup-sbcl
 
-      # Runs a single command using the runners shell
-      - name: Bootstrap and build
-        run: sbcl --load "bootstrap.lisp" --load "build.lisp"
+      - name: Build CLI app
+        run: sbcl --load "bootstrap.lisp" --load "ks2/build-helper.lisp" --eval "(build-app)"
+
+      - name: Build runner
+        run: sbcl --load "bootstrap.lisp" --load "ks2/build-helper.lisp" --eval "(build-runner)"
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: ks2-bin
+          name: ks2-bin-${{ matrix.suffix }} 
           path: ks2/bin/
 
