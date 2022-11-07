@@ -4,3 +4,4 @@
 
 # Ignore the quicklisp data directory
 quicklisp/
+data/
