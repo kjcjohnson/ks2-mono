@@ -41,10 +41,18 @@ jobs:
         uses: ./.github/actions/setup-sbcl
 
       - name: Build CLI app
-        run: sbcl --load "bootstrap.lisp" --load "ks2/build-helper.lisp" --eval "(build-app)"
+        run: |
+          sbcl --disable-debugger \
+               --load "bootstrap.lisp" \
+               --load "ks2/build-helper.lisp" \
+               --eval "(build-app)"
 
       - name: Build runner
-        run: sbcl --load "bootstrap.lisp" --load "ks2/build-helper.lisp" --eval "(build-runner)"
+        run: |
+          sbcl --disable-debugger \
+               --load "bootstrap.lisp" \
+               --load "ks2/build-helper.lisp" \
+               --eval "(build-runner)"
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
