@@ -42,17 +42,11 @@ jobs:
 
       - name: Build CLI app
         run: |
-          sbcl --disable-debugger \
-               --load "bootstrap.lisp" \
-               --load "ks2/build-helper.lisp" \
-               --eval "(build-app)"
+          sbcl --disable-debugger --load "bootstrap.lisp" --load "ks2/build-helper.lisp" --eval "(build-app)"
 
       - name: Build runner
         run: |
-          sbcl --disable-debugger \
-               --load "bootstrap.lisp" \
-               --load "ks2/build-helper.lisp" \
-               --eval "(build-runner)"
+          sbcl --disable-debugger --load "bootstrap.lisp" --load "ks2/build-helper.lisp" --eval "(build-runner)"
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
