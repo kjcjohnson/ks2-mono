@@ -46,7 +46,7 @@ jobs:
 
       - name: Build runner
         run: |
-          sbcl --disable-debugger --load "bootstrap.lisp" --load "ks2/build-helper.lisp" --eval "(build-runner)"
+          sbcl --disable-debugger --load "bootstrap.lisp" --load "ks2/build-helper.lisp" --eval "(build-runner :disable-smt t)"
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
