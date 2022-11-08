@@ -63,7 +63,6 @@ jobs:
           - imperative
           - integer-arithmetic
           - non-deterministic
-          - regular-expressions/alpharegex
           - regular-expressions/manually-constructed
 
     name: Benchmark Suite ${{ matrix.benchmark }}
