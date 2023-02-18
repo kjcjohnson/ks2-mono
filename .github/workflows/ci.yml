@@ -27,6 +27,10 @@ jobs:
           - name: Windows Build
             os: windows-latest
             suffix: win-x64
+            
+          - name: macOS Build
+            os: macos-latest
+            suffix: macos-x64
 
     name: ${{ matrix.name }}
     runs-on: ${{ matrix.os }}
