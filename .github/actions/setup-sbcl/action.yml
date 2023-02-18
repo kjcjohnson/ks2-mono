@@ -41,4 +41,7 @@ runs:
         printf '#!/bin/sh\nexec ros -L sbcl-bin run -- "$@"\n' > "${HOME}/.bin/sbcl"
         chmod a+x "${HOME}/.bin/sbcl"
         echo "${HOME}/.bin/" >> $GITHUB_PATH
+        export PATH="${HOME}/.bin/:${PATH}"
+        echo "HOME: ${HOME}"
+        echo "PATH: ${PATH}"
         sbcl --help
