@@ -35,5 +35,6 @@ runs:
         export LISP=sbcl-bin
         brew install automake autoconf curl
         curl -L https://raw.githubusercontent.com/roswell/roswell/master/scripts/install-for-ci.sh | sh -x
+        echo "SBCL installation done."
         which sbcl
         sbcl --help
