@@ -26,3 +26,14 @@ runs:
         scoop install sbcl
         sbcl --help
         echo "::endgroup::"
+
+    - name: Install macOS software
+      if: runner.os == 'macOS'
+      shell: bash
+      run: |
+        echo "::group::Install macOS software"
+        export LISP=sbcl-bin
+        brew install automake autoconf curl
+        curl -L https://raw.githubusercontent.com/roswell/roswell/master/scripts/install-for-ci.sh | sh -x
+        which sbcl
+        sbcl --help
