@@ -36,7 +36,6 @@ runs:
         brew install automake autoconf curl tree
         curl -L https://raw.githubusercontent.com/roswell/roswell/master/scripts/install-for-ci.sh | sh -x
         echo "SBCL installation done."
-        tree -L 3
-        ls /usr/local/bin
-        find . -name sbcl
+        ros list installed sbcl
+        find /usr/local/Cellar/roswell -name sbcl
         sbcl --help
