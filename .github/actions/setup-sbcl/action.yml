@@ -33,8 +33,10 @@ runs:
       run: |
         echo "::group::Install macOS software"
         export LISP=sbcl-bin
-        brew install automake autoconf curl
+        brew install automake autoconf curl tree
         curl -L https://raw.githubusercontent.com/roswell/roswell/master/scripts/install-for-ci.sh | sh -x
         echo "SBCL installation done."
-        which sbcl
+        tree -L 3
+        ls /usr/local/bin
+        find . -name sbcl
         sbcl --help
