@@ -23,7 +23,17 @@ runs:
         echo "::group::Install Windows software"
         iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
         Add-Content $env:GITHUB_PATH "$HOME\scoop\shims"
-        scoop install sbcl
+        $sbclInstalled = $false
+        $retryCount = 0
+        while ($retryCount -lt 5 -and -not $sbclInstalled) {
+          try {
+            scoop install sbcl
+            $sbclInstalled = $true
+          } catch {
+            ++$retryCount
+            Start-Sleep -Seconds 1
+          }
+        }
         sbcl --help
         echo "::endgroup::"
 
