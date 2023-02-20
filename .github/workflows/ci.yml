@@ -42,7 +42,7 @@ jobs:
 
       - name: Build CLI app
         run: |
-          sbcl --disable-debugger --load "bootstrap.lisp" --load "ks2/build-helper.lisp" --eval "(build-app)"
+          sbcl --disable-debugger --load "bootstrap.lisp" --load "ks2/build-helper.lisp" --eval "(build-app :public-release t)"
 
       - name: Build runner
         run: |
