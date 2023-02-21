@@ -23,6 +23,35 @@ runs:
         echo "::group::Install Windows software"
         iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
         Add-Content $env:GITHUB_PATH "$HOME\scoop\shims"
-        scoop install sbcl
+        $sbclInstalled = $false
+        $retryCount = 0
+        while ($retryCount -lt 5 -and -not $sbclInstalled) {
+          try {
+            scoop install sbcl
+            $sbclInstalled = $true
+          } catch {
+            ++$retryCount
+            Start-Sleep -Seconds 1
+          }
+        }
         sbcl --help
         echo "::endgroup::"
+
+    - name: Install macOS software
+      if: runner.os == 'macOS'
+      shell: bash
+      run: |
+        echo "::group::Install macOS software"
+        export LISP=sbcl-bin
+        brew install automake autoconf curl tree
+        curl -L https://raw.githubusercontent.com/roswell/roswell/master/scripts/install-for-ci.sh | sh -x
+        echo "SBCL installation done."
+        ros list installed
+        mkdir "${HOME}/.bin"
+        printf '#!/bin/sh\nexec ros -L sbcl-bin run -- "$@"\n' > "${HOME}/.bin/sbcl"
+        chmod a+x "${HOME}/.bin/sbcl"
+        echo "${HOME}/.bin/" >> $GITHUB_PATH
+        export PATH="${HOME}/.bin/:${PATH}"
+        echo "HOME: ${HOME}"
+        echo "PATH: ${PATH}"
+        sbcl --help
