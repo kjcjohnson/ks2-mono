@@ -28,13 +28,13 @@ runs:
         while ($retryCount -lt 5 -and -not $sbclInstalled) {
           try {
             scoop install sbcl
+            sbcl --help
             $sbclInstalled = $true
           } catch {
             ++$retryCount
             Start-Sleep -Seconds 1
           }
         }
-        sbcl --help
         echo "::endgroup::"
 
     - name: Install macOS software
