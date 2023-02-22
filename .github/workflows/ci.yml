@@ -58,6 +58,44 @@ jobs:
           name: ks2-bin-${{ matrix.suffix }}
           path: ks2/bin/
 
+  package:
+    strategy:
+      matrix:
+        include:
+          - name: Package Linux
+            suffix: linux-x64
+            chmod: true
+          - name: Package Windows
+            suffix: win-x64
+            chmod: false
+          - name: Package macOS
+            suffix: macos-x64
+            chmod: true
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    needs: [build]
+    
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: ks2-bin-${{ matrix.suffix }}
+          path: bin
+          
+      - name: Update Permissions
+        if: ${{ matrix.chmod == true }}
+        run: |
+          shopt -s nullglob
+          chmod a+x bin/ks2 bin/*.image bin/*.core bin/*.exe
+      
+      - name: Zip Solver
+        run: zip -r -j zip/ks2-bin-${{ matrix.suffix }}.zip bin/
+        
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: ks2-bin-${{ matrix.suffix }}.zip
+          path: zip/*.zip
+
   benchmarks:
     strategy:
       fail-fast: false
