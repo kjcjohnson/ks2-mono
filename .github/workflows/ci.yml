@@ -88,7 +88,9 @@ jobs:
           chmod a+x bin/ks2 bin/*.image bin/*.core bin/*.exe
       
       - name: Zip Solver
-        run: zip -r -j zip/ks2-bin-${{ matrix.suffix }}.zip bin/
+        run: |
+          mkdir zip
+          zip -j -r zip/ks2-bin-${{ matrix.suffix }}.zip bin/*
         
       - name: Upload
         uses: actions/upload-artifact@v2
