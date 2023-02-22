@@ -65,12 +65,15 @@ jobs:
           - name: Package Linux
             suffix: linux-x64
             chmod: true
+            parser-archive-file: semgus-parser-linux-x64.zip
           - name: Package Windows
             suffix: win-x64
             chmod: false
+            parser-archive-file: semgus-parser-win-x64.zip
           - name: Package macOS
             suffix: macos-x64
             chmod: true
+            parser-archive-file: semgus-parser-osx-x64.zip
     name: ${{ matrix.name }}
     runs-on: ubuntu-latest
     needs: [build]
@@ -88,17 +91,40 @@ jobs:
           shopt -s nullglob
           ls -l -a bin
           chmod a+x bin/ks2 bin/*.image bin/*.core bin/*.exe
+          ls -l -a bin
       
       - name: Zip Solver
         run: |
           mkdir zip
           zip -j -r zip/ks2-bin-${{ matrix.suffix }}.zip bin/*
         
-      - name: Upload
+      - name: Upload Solver
         uses: actions/upload-artifact@v2
         with:
           name: ks2-bin-${{ matrix.suffix }}.zip
           path: zip/*.zip
+          
+      - name: Download Parser
+        uses: robinraju/release-downloader@v1.7
+        with:
+          repository: "SemGuS-Git/Semgus-Parser"
+          latest: true
+          fileName: ${{ matrix.parser-archive-file }}
+          out-file-name: parser
+          
+      - name: Unpack Parser
+        run: |
+          ls -l -a parser
+          unzip -d bin parser/${{ matrix.parser-archive-file }}
+          
+      - name: Zip Solver+Parser
+        run: zip -j -r zip/ks2-bin+parser-${{ matrix.suffix }}.zip bin/*
+        
+      - name: Upload Solver+Parser
+        uses: actions/upload-artifact@v2
+        with:
+          name: ks2-bin+parser-${{ matrix.suffix }}.zip
+          path: zip/ks2-bin+parser-${{ matrix.suffix }}.zip
 
   benchmarks:
     strategy:
