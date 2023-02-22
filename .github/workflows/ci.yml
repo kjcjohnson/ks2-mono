@@ -110,7 +110,7 @@ jobs:
           repository: "SemGuS-Git/Semgus-Parser"
           latest: true
           fileName: ${{ matrix.parser-archive-file }}
-          out-file-name: parser
+          out-file-path: parser
           
       - name: Unpack Parser
         run: |
