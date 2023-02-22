@@ -84,11 +84,10 @@ jobs:
       - name: Update Permissions
         if: ${{ matrix.chmod == true }}
         run: |
+          set -x
           shopt -s nullglob
-          ls bin
-          ls bin/*
-          ls bin/*/*
-          chmod a+x bin/*/ks2 bin/*/*.image bin/*/*.core bin/*/*.exe
+          ls -l -a bin
+          chmod a+x bin/ks2 bin/*.image bin/*.core bin/*.exe
       
       - name: Zip Solver
         run: |
