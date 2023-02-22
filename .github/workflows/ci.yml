@@ -85,7 +85,8 @@ jobs:
         if: ${{ matrix.chmod == true }}
         run: |
           shopt -s nullglob
-          chmod a+x bin/ks2 bin/*.image bin/*.core bin/*.exe
+          ls bin/*/*
+          chmod a+x bin/*/ks2 bin/*/*.image bin/*/*.core bin/*/*.exe
       
       - name: Zip Solver
         run: |
