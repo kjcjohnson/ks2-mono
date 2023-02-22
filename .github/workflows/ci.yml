@@ -121,7 +121,7 @@ jobs:
         run: zip -j -r zip/ks2-bin+parser-${{ matrix.suffix }}.zip bin/*
         
       - name: Upload Solver+Parser
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ks2-bin+parser-${{ matrix.suffix }}.zip
           path: zip/ks2-bin+parser-${{ matrix.suffix }}.zip
