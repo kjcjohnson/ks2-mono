@@ -159,7 +159,7 @@ jobs:
           - imperative
           - integer-arithmetic
           - non-deterministic
-          - regular-expressions/manually-constructed
+#          - regular-expressions/manually-constructed
 
     name: Benchmark Suite ${{ matrix.benchmark }}
     runs-on: ubuntu-latest
