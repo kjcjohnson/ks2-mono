@@ -2,9 +2,11 @@
 Mono repository aggregating all of ks2 and dependencies
 
 ## Installation Instructions
-1. Download the package for your operating system from [the latest release](https://github.com/kjcjohnson/ks2-mono/releases/latest).
-Choose the `bin+parser` package for an all-in-one zip including the [SemGuS Parser](https://github.com/SemGuS-git/Semgus-Parser), or just the `bin`
-package if you already have the SemGuS Parser installed and in your `PATH`.
+1. Download the package for your operating system from [the latest release](https://github.com/kjcjohnson/ks2-mono/releases/latest). Currently,
+ks2 depends on [cvc5](https://github.com/cvc5/cvc5) (optional: required for problems that need an SMT solver) and the
+[SemGuS Parser](https://github.com/SemGuS-git/Semgus-Parser) (optional: required to accept the native SemGuS benchmark format).
+Choose the `bin+all` package for an all-in-one zip including the SemGuS Parser and cvc5, `bin+parser` for just ks2 and the SemGuS Parser,
+or just the `bin` package if you already have the SemGuS Parser and cvc5 installed and in your `PATH`.
 
 2. Unzip the archive
 
@@ -62,3 +64,7 @@ and they will be triaged to the appropriate projects. For reporting issues, plea
 * Solver output, run with the `--debug` flag
 * Benchmark file
 * Operating system and version
+
+## Other Information
+This project optionally bundles [cvc5](https://github.com/cvc5/cvc5). See `cvc5.COPYING` in this repository for
+license and legal information.
