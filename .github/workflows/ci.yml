@@ -135,30 +135,29 @@ jobs:
           name: ks2-bin+parser-${{ matrix.suffix }}.zip
           path: zip/ks2-bin+parser-${{ matrix.suffix }}.zip
 
-      - name: Download cvc5
-        uses: robinraju/release-downloader@v1.7
-        with:
-          repository: cvc5/cvc5
-          latest: true
-          fileName: ${{ matrix.cvc5-archive-file }}
-          out-file-path: bin
+      # - name: Download cvc5
+      #   uses: robinraju/release-downloader@v1.7
+      #   with:
+      #     repository: cvc5/cvc5
+      #     latest: true
+      #     fileName: ${{ matrix.cvc5-archive-file }}
+      #     out-file-path: bin
 
-      - name: Rename cvc5
-        run: mv bin/${{ matrix.cvc5-archive-file }} bin/cvc5${{ matrix.exe-suffix }}
+      # - name: Rename cvc5
+      #   run: mv bin/${{ matrix.cvc5-archive-file }} bin/cvc5${{ matrix.exe-suffix }}
 
-      - name: Update cvc5 Permissions
-        if: ${{ matrix.chmod == true }}
-        run: |
-          chmod a+x bin/cvc5
+      # - name: Update cvc5 Permissions
+      #   if: ${{ matrix.chmod == true }}
+      #   run: chmod a+x bin/cvc5
 
-      - name: Zip Solver+All
-        run: zip -j -r zip/ks2-bin+all-${{ matrix.suffix }}.zip bin/*
+      # - name: Zip Solver+All
+      #   run: zip -j -r zip/ks2-bin+all-${{ matrix.suffix }}.zip bin/*
 
-      - name: Upload Solver+All
-        uses: actions/upload-artifact@v3
-        with:
-          name: ks2-bin+all-${{ matrix.suffix }}.zip
-          path: zip/ks2-bin+all-${{ matrix.suffix }}.zip
+      # - name: Upload Solver+All
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: ks2-bin+all-${{ matrix.suffix }}.zip
+      #     path: zip/ks2-bin+all-${{ matrix.suffix }}.zip
 
   release:
     runs-on: ubuntu-latest
@@ -218,7 +217,7 @@ jobs:
           mv bin/cvc5-Linux bin/cvc5
           chmod a+x bin/*
           mkdir data
-          bin/ks2 --suite ${{ matrix.benchmark }} --suite-root benchmarks
+          PATH="bin:${PATH}" bin/ks2 --suite ${{ matrix.benchmark }} --suite-root benchmarks
 
       - name: Upload results
         uses: actions/upload-artifact@v3
