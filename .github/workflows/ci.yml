@@ -51,7 +51,7 @@ jobs:
         run: |
           sbcl --disable-debugger --load "bootstrap.lisp" --load "ks2/build-helper.lisp" --eval "(build-app :public-release t)"
 
-      - name: Build runner
+      - name: Build solver core
         run: |
           sbcl --disable-debugger --load "bootstrap.lisp" --load "ks2/build-helper.lisp" --eval "(build-core)"
 
@@ -217,7 +217,7 @@ jobs:
           mv bin/cvc5-Linux bin/cvc5
           chmod a+x bin/*
           mkdir data
-          bin/ks2 "benchmarks/${{ matrix.benchmark }}"
+          bin/ks2 benchmark "benchmarks/${{ matrix.benchmark }}"
 
       - name: Upload results
         uses: actions/upload-artifact@v3
