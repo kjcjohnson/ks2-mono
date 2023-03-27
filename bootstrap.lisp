@@ -13,6 +13,7 @@
    :ignore-inherited-configuration))
 
 ;;; Load quicklisp, initializing it if necessary
+#-quicklisp
 (format *trace-output* "~&; Bootstrapping Quicklisp...~%")
 (if (uiop:file-exists-p #P"quicklisp/setup.lisp")
     (load "quicklisp/setup.lisp")
