@@ -53,7 +53,7 @@ jobs:
 
       - name: Build runner
         run: |
-          sbcl --disable-debugger --load "bootstrap.lisp" --load "ks2/build-helper.lisp" --eval "(build-runner :disable-smt nil)"
+          sbcl --disable-debugger --load "bootstrap.lisp" --load "ks2/build-helper.lisp" --eval "(build-core)"
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
@@ -217,7 +217,7 @@ jobs:
           mv bin/cvc5-Linux bin/cvc5
           chmod a+x bin/*
           mkdir data
-          bin/ks2 --suite ${{ matrix.benchmark }} --suite-root benchmarks
+          bin/ks2 "benchmarks/${{ matrix.benchmark }}"
 
       - name: Upload results
         uses: actions/upload-artifact@v3
