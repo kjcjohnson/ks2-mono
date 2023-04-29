@@ -14,24 +14,46 @@ Note that the Linux release requires a recent version of `glibc`: it will probab
 
 ## Running the ks2 synthesizer suite
 ```
-ks2 - the ks2 synthesizer suite
+NAME:
+  ks2 - the ks2 synthesizer suite
 
-Usage: ks2 [-h|--help] [-s|--solver SOLVER] [--suite SUITE] [--suite-root ROOT]
-           [--debug] [BENCHMARK]
+USAGE:
+  ks2 [global-options] [<command>] [command-options] [arguments ...]
 
-Available options:
-  -h, --help          Prints help about the ks2 runner
-  -s, --solver SOLVER Selects a solver to run [Default: T]
-  --suite SUITE       Selects a suite to run
-  --suite-root ROOT   Root directory of suite data
-  --debug             Enables extra tool debug information
+OPTIONS:
+      --debug    enables extra debugging information [env: $KS2_DEBUG]
+      --help     display usage information and exit
+      --version  display version and exit
 
-Available solvers: bottom-up-enum top-down-enum random
+COMMANDS:
+  solve      solves an individual synthesis problem
+  benchmark  benchmarks solvers against problem suites
+  report     generate reports from benchmark data files
+
+LICENSE:
+  MIT
+
+Available solvers: bottom-up-enum (alias: enum), top-down-enum (alias: tde), random
+```
+
+To solve a problem file:
+```
+NAME:
+  ks2 solve - solves an individual synthesis problem
+
+USAGE:
+  ks2 solve [options] [benchmark]
+
+OPTIONS:
+      --help                display usage information and exit
+      --version             display version and exit
+      -c, --core <VALUE>    core to use [env: $KS2_CORE]
+      -s, --solver <VALUE>  solver to use [env: $KS2_SOLVER]
 ```
 
 Normally, just call with a solver and a benchmark file:
 ```
-./ks2 --solver bottom-up-enum path/to/benchmark.sem
+./ks2 solve -s tde path/to/benchmark.sem
 ```
 
 The ks2 synthesize suite natively accepts SemGuS benchmarks in the declarative S-expression intermediate format (not SMT-LIB2 encoded),
@@ -46,7 +68,6 @@ A successful benchmark run will output a result block like the following:
 ;   PPS: 185.81prog/s
 ```
 Note the following points:
-* The solving time is measured in one-second increments
 * The maximum memory offset is the peak memory usage above the baseline usage before solving a problem
 * The programs per second (PPS) measures how many candidate programs were executed per second on average during solving
 
