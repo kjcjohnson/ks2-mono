@@ -176,7 +176,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           name: ${{ github.event.release.name }}
-          files: assets/*.zip
+          files: assets/*.zip/*.zip
 
   benchmarks:
     strategy:
