@@ -13,3 +13,6 @@
 [submodule "tdp-synthesis"]
 	path = tdp-synthesis
 	url = git@github.com:kjcjohnson/tdp-synthesis.git
+[submodule "plugboard"]
+	path = plugboard
+	url = git@github.com:duck-systems/plugboard.git
