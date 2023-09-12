@@ -179,6 +179,7 @@ jobs:
           files: assets/*.zip/*.zip
 
   benchmarks:
+    if: false # Disable for now
     strategy:
       fail-fast: false
       matrix:
