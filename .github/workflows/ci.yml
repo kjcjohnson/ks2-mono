@@ -160,18 +160,19 @@ jobs:
           path: zip/ks2-bin+all-${{ matrix.suffix }}.zip
 
   smoke-test:
+    needs: [package]
     strategy:
       matrix:
         include:
-          - name: Ubuntu Build
+          - name: Ubuntu Smoke Tests
             os: ubuntu-latest
             suffix: linux-x64
 
-          - name: Windows Build
+          - name: Windows Smoke Tests
             os: windows-latest
             suffix: win-x64
 
-          - name: macOS Build
+          - name: macOS Smoke Tests
             os: macos-latest
             suffix: macos-x64
 
