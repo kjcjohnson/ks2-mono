@@ -159,6 +159,45 @@ jobs:
           name: ks2-bin+all-${{ matrix.suffix }}.zip
           path: zip/ks2-bin+all-${{ matrix.suffix }}.zip
 
+  smoke-test:
+    strategy:
+      matrix:
+        include:
+          - name: Ubuntu Build
+            os: ubuntu-latest
+            suffix: linux-x64
+
+          - name: Windows Build
+            os: windows-latest
+            suffix: win-x64
+
+          - name: macOS Build
+            os: macos-latest
+            suffix: macos-x64
+
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.SUBMODULE_PAT }}
+          submodules: recursive
+          
+      - uses: actions/download-artifact@v3
+        with:
+          name: ks2-bin+all-${{ matrix.suffix }}.zip
+
+      - name: Unzip Package
+        shell: bash
+        run: |
+          mkdir -p ks2/bin
+          unzip ks2-bin+all-${{ matrix.suffix }}.zip -d ks2/bin/
+
+      - name: Smoke Tests
+        run: ks2/run-smoke-tests.sh
+        shell: bash
+
   release:
     runs-on: ubuntu-latest
     needs: [package]
