@@ -60,7 +60,7 @@ The ks2 synthesize suite natively accepts SemGuS benchmarks in the declarative S
 but it will automatically invoke the SemGuS Parser on benchmarks with `.sem`, `.sl`, and `.smt` extensions.
 
 ## Output Format
-A successful benchmark run will output a result block like the following:
+A successful benchmark run will output a result block like the following, unless quiet mode is enabled:
 ```
 ; RESULT: $pair($leaf($name5),$leaf($name6))
 ;   TIME: 1.00s
@@ -73,6 +73,17 @@ Note the following points:
 
 Solving benchmarks can either fail with an internal solver error or a core crash. Core crashes are common and expected, and
 they generally indicate that the solver process ran out of memory.
+
+In addition, a result in SMT-LIB format will be output:
+```lisp
+(
+  (define-fun fun () T ($pair ($leaf $name5) ($leaf $name6)))
+)
+
+```
+Other options might be the symbols `unrealizable`, `timeout`, or `error`.
+
+[Full command documentation is available here.](ks2.md)
 
 ## Caveats
 This tool is currently an experimental preview and may be unstable. All parts are subject to change in the future.
