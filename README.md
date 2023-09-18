@@ -13,6 +13,9 @@ or just the `bin` package if you already have the SemGuS Parser and cvc5 install
 Note that the Linux release requires a recent version of `glibc`: it will probably run on Ubuntu 22.04 LTS, but not on Ubuntu 20.04 LTS.
 
 ## Running the ks2 synthesizer suite
+
+[Full command documentation is available here.](ks2.md)
+
 ```
 NAME:
   ks2 - the ks2 synthesizer suite
@@ -82,8 +85,6 @@ In addition, a result in SMT-LIB format will be output:
 
 ```
 Other options might be the symbols `unrealizable`, `timeout`, or `error`.
-
-[Full command documentation is available here.](ks2.md)
 
 ## Caveats
 This tool is currently an experimental preview and may be unstable. All parts are subject to change in the future.
