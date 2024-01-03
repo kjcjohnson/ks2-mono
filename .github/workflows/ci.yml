@@ -114,7 +114,7 @@ jobs:
           path: zip/*.zip
 
       - name: Download Parser
-        uses: robinraju/release-downloader@v1.7
+        uses: robinraju/release-downloader@v1.8
         with:
           repository: "SemGuS-Git/Semgus-Parser"
           latest: true
@@ -136,10 +136,11 @@ jobs:
           path: zip/ks2-bin+parser-${{ matrix.suffix }}.zip
 
       - name: Download cvc5
-        uses: robinraju/release-downloader@v1.7
+        uses: robinraju/release-downloader@v1.8
         with:
           repository: cvc5/cvc5
-          latest: true
+          latest: false
+          tag: cvc5-1.0.4
           fileName: ${{ matrix.cvc5-archive-file }}
           out-file-path: bin
 
@@ -246,10 +247,11 @@ jobs:
           path: bin
 
       - name: Grab cvc5
-        uses: robinraju/release-downloader@v1.7
+        uses: robinraju/release-downloader@v1.8
         with:
           repository: cvc5/cvc5
-          latest: true
+          latest: false
+          tag: cvc5-1.0.4
           fileName: cvc5-Linux
           out-file-path: bin
 
