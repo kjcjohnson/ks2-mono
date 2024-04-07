@@ -16,3 +16,6 @@
 [submodule "plugboard"]
 	path = plugboard
 	url = git@github.com:duck-systems/plugboard.git
+[submodule "ks2-bue"]
+	path = ks2-bue
+	url = git@github.com:duck-systems/ks2-bue.git
