@@ -1,9 +1,6 @@
 [submodule "synthkit"]
 	path = synthkit
 	url = git@github.com:kjcjohnson/synthkit.git
-[submodule "frangel-for-semgus"]
-	path = frangel-for-semgus
-	url = git@github.com:kjcjohnson/frangel-for-semgus.git
 [submodule "ks2"]
 	path = ks2
 	url = git@github.com:kjcjohnson/ks2.git
@@ -19,3 +16,6 @@
 [submodule "ks2-bue"]
 	path = ks2-bue
 	url = git@github.com:duck-systems/ks2-bue.git
+[submodule "ks2-sygus"]
+	path = ks2-sygus
+	url = git@github.com:duck-systems/ks2-sygus.git
